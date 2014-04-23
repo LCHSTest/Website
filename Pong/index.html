@@ -29,6 +29,28 @@
       var rightPaddle_y = leftPaddle_y; 
       var leftPaddle_x = 5;
       var rightPaddle_x = CANVAS_WIDTH - paddle_Width - leftPaddle_x;
+
+      function handleKeyDown(event)
+      {
+        switch(event.which)
+        {
+          case 38:
+            rightPaddle_y -= 2;
+            if(rightPaddle_y <= 0)
+            {
+              rightPaddle_y = 0;
+            } 
+            break;
+          case 40:
+            rightPaddle_y += 2;
+            if(rightPaddle_y >= CANVAS_HEIGHT - paddle_Height)
+            {
+              rightPaddle_y >= CANVAS_HEIGHT - paddle_Height;
+            } 
+            break;
+        }
+      }
+
       /**
        * This function takes a 2d canvas context and draws a ball on it at ballX and ballY
        * of radius BALL_RADIUS and color BALL_COLOR.
@@ -79,7 +101,7 @@
         var context = pongCanvas.getContext('2d');
         context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         drawBall(context);
-        
+        drawPaddles(context);
       }
 
       // Redraw the canvas every REFRESH_TIME milliseconds
@@ -102,7 +124,7 @@
       };
     </style>
   </head>
-  <body>
+  <body onkeydown="handleKeyDown(event)">
     <canvas id="pongCanvas" width="500" height="300"></canvas>
   </body>
 </html>
